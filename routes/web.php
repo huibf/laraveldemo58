@@ -16,19 +16,20 @@ Route::get('/', function () {
     return view('welcome');
 });
 
- // Auth::routes();
+// Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
 
-Route::prefix('admin')->namespace('Admin')->middleware(['demoage'])->group(function () {
-
+// Route::prefix('admin')->namespace('Admin')->middleware(['adminauth'])->group(function () {
+Route::prefix('admin')->namespace('Admin')->group(function () {
     Route::get('index', 'LoginController@index');
 
 });
 
 
-Route::prefix('admin')->namespace('Admin')->middleware(['demoage'])->group(function () {
+Route::prefix('admin')->namespace('Admin')->group(function () {
     Route::get('login', 'LoginController@loginform');  // 匹配 "/admin/login" 的 URL
     Route::post('login', 'LoginController@login');
+    Route::get('loginout', 'LoginController@loginout');
 });

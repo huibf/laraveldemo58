@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 
-// use Auth;
+
 use Illuminate\Support\Facades\Auth;
 
 class DemoAge
@@ -33,11 +33,12 @@ class DemoAge
 
         if (!Auth::guard('admin')->check()) {
 
-            echo '路由：adminauth<br>';
-            // return redirect('/admin/login');
+            // echo '路由：adminauth；突出<br>';
+
+             return redirect('/admin/login');
 
         }
-
+        // echo '路由：adminauth<br>';
 
         return $next($request);
         /*

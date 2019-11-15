@@ -12,7 +12,7 @@ class LoginController extends Controller
 
     public function __construct()
     {
-       // $this->middleware('adminauth')->except(['loginform','login']);
+       $this->middleware('adminauth')->except(['loginform','login','loginout']);
        // $this->middleware('adminauth');//死循环
     }
 
@@ -26,10 +26,21 @@ class LoginController extends Controller
         // return 'hello login';
         return view('admin.loginform');
     }
-
+   public function loginout(){
+       Auth::guard('admin')->logout(); // 退出
+       return view('admin.loginform');
+   }
     public function index()
     {
-        return '后台';
+        // 获取当前认证用户...
+        $user = Auth::guard('admin')->user();
+
+        // 获取当前认证用户的ID...
+        $id = Auth::guard('admin')->id();
+
+       $data = ['id'=>$id,'user'=>$user];
+
+        return view('admin.index',$data);
     }
 
     /**
@@ -45,10 +56,22 @@ class LoginController extends Controller
 
         echo $username . ';' . $password;
 
-        $status = Auth::guard('admin')->attempt(['username' => $username, 'password' => $password]);
+
+        $user = $this->validate($request, [
+            'username' => 'required|max:20',
+            'password' => 'required|min:5',
+        ]);
+
+       // $status = Auth::guard('admin')->attempt(['username' => $username, 'password' => $password]);
+
+        $status = Auth::guard('admin')->attempt($user);
 
         var_dump($status);
+
         if ($status) {
+
+            session()->flash('danger', '很抱歉，您的用户名和密码不匹配');
+
             return redirect('/admin/index');
         }
         return redirect('/admin/login')->with('error','用户名或密码错误');

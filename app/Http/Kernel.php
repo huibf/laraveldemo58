@@ -67,7 +67,6 @@ class Kernel extends HttpKernel
 
         'adminauth' => \App\Http\Middleware\Adminauth::class,
 
-        'demoage' => \App\Http\Middleware\DemoAge::class,
 
     ];
 
