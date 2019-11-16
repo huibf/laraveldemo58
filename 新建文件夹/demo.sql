@@ -25,15 +25,35 @@ CREATE TABLE IF NOT EXISTS `admins` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `admins_username_unique` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Dumping data for table demo.admins: ~3 rows (大约)
 /*!40000 ALTER TABLE `admins` DISABLE KEYS */;
 INSERT INTO `admins` (`id`, `username`, `password`, `created_at`, `updated_at`) VALUES
 	(2, 'admin', '$2y$10$qzOQxT2GopemgQ5JBwxLPu8yhxftZXte06xe5Om7y2/IaPPfVZy3y', '2019-11-14 06:43:28', '2019-11-14 06:43:28'),
 	(3, 'Adrienne Murazik PhD', '$2y$10$qzOQxT2GopemgQ5JBwxLPu8yhxftZXte06xe5Om7y2/IaPPfVZy3y', '2019-11-14 06:43:30', '2019-11-14 06:43:30'),
-	(4, 'Kellie Mitchell', '$2y$10$qzOQxT2GopemgQ5JBwxLPu8yhxftZXte06xe5Om7y2/IaPPfVZy3y', '2019-11-14 06:43:30', '2019-11-14 06:43:30');
+	(4, 'Kellie Mitchell', '$2y$10$hU4e./cgZAqyby.yhhjRme/ecu9oqMq2gIm16dcOV77LZ/0X/Tj.q', '2019-11-14 06:43:30', '2019-11-14 06:43:30'),
+	(5, 'Erika Bednar', '$2y$10$f2JQrQol2TGTmnTjz2WIXelOtd0m6ahvS3PR4X0sXnqnKw48p8Peq', '2019-11-16 07:21:57', '2019-11-16 07:21:57'),
+	(6, 'Prof. Caleigh Russel DVM', '$2y$10$f2JQrQol2TGTmnTjz2WIXelOtd0m6ahvS3PR4X0sXnqnKw48p8Peq', '2019-11-16 07:23:15', '2019-11-16 07:23:15'),
+	(7, 'Miss Clare Bartell', '$2y$10$hU4e./cgZAqyby.yhhjRme/ecu9oqMq2gIm16dcOV77LZ/0X/Tj.q', '2019-11-16 07:25:09', '2019-11-16 07:25:09'),
+	(8, 'Watson Klein', '$2y$10$hU4e./cgZAqyby.yhhjRme/ecu9oqMq2gIm16dcOV77LZ/0X/Tj.q', '2019-11-16 07:31:48', '2019-11-16 07:31:48'),
+	(9, '吴智敏', '$2y$10$PqiPwT6gLHRVjh9p.zMNA.AFIyKg.bPL1vC6TaeaBfwDmhG7m.L0W', '2019-11-16 07:34:47', '2019-11-16 07:34:47');
 /*!40000 ALTER TABLE `admins` ENABLE KEYS */;
+
+-- Dumping structure for table demo.ceshi
+CREATE TABLE IF NOT EXISTS `ceshi` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `age` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `ceshi_name_unique` (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Dumping data for table demo.ceshi: ~0 rows (大约)
+/*!40000 ALTER TABLE `ceshi` DISABLE KEYS */;
+/*!40000 ALTER TABLE `ceshi` ENABLE KEYS */;
 
 -- Dumping structure for table demo.migrations
 CREATE TABLE IF NOT EXISTS `migrations` (
@@ -41,14 +61,15 @@ CREATE TABLE IF NOT EXISTS `migrations` (
   `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table demo.migrations: ~2 rows (大约)
+-- Dumping data for table demo.migrations: ~4 rows (大约)
 /*!40000 ALTER TABLE `migrations` DISABLE KEYS */;
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 	(1, '2014_10_12_000000_create_users_table', 1),
 	(2, '2014_10_12_100000_create_password_resets_table', 1),
-	(5, '2019_11_14_060506_create_admins_table', 2);
+	(5, '2019_11_14_060506_create_admins_table', 2),
+	(8, '2019_11_16_025308_create_ceshi_table', 3);
 /*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
 
 -- Dumping structure for table demo.password_resets

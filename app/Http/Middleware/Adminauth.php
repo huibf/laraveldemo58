@@ -4,7 +4,6 @@ namespace App\Http\Middleware;
 
 use Closure;
 
-
 use Illuminate\Support\Facades\Auth;
 
 class Adminauth
@@ -25,22 +24,23 @@ class Adminauth
                    if ($age >= 150) {
                        echo '测试：路由中间件，DemoAge；age 有误<br>';
                        // exit;
-                       // ren redirect('home');
+                       // return redirect('home');
                    }
                }
 
             */
 
-
-
         if (!Auth::guard('admin')->check()) {
-
-            // echo '路由：adminauth；突出<br>';
-
-            return redirect('/admin/login');
+            if ($request->ajax() || $request->wantsJson()) {
+                return response('Unauthorized.', 401);
+            } else {
+                return redirect('/admin/login');
+            }
+            // echo '路由：adminauth；<br>';
 
         }
-        // echo '路由：adminauth<br>';
+
+        // echo '公共的内容<br>';
 
         return $next($request);
         /*

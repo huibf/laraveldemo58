@@ -12,9 +12,46 @@ class LoginController extends Controller
 
     public function __construct()
     {
-       $this->middleware('adminauth')->except(['loginform','login','loginout']);
+      // $this->middleware('adminauth')->except(['loginform','login','loginout']);//用户认证
        // $this->middleware('adminauth');//死循环
     }
+
+
+/*
+   // 多字段登录并判断状态
+    public function attemptLogin(Request $request)
+    {
+        $username = $request->input('name');
+        $password = $request->input('password');
+
+        // 验证用户名登录方式
+        $usernameLogin = $this->guard()->attempt(
+            ['name' => $username, 'password' => $password,'status'=>1], $request->has('remember')
+        );
+        if ($usernameLogin) {
+            return true;
+        }
+
+        // 验证手机号登录方式
+        $mobileLogin = $this->guard()->attempt(
+            ['mobile' => $username, 'password' => $password,'status'=>1], $request->has('remember')
+        );
+        if ($mobileLogin) {
+            return true;
+        }
+
+        // 验证邮箱登录方式
+        $emailLogin = $this->guard()->attempt(
+            ['email' => $username, 'password' => $password,'status'=>1], $request->has('remember')
+        );
+        if ($emailLogin) {
+            return true;
+        }
+
+        return false;
+    }
+*/
+
 
     /**
      * Display a listing of the resource.
@@ -28,7 +65,8 @@ class LoginController extends Controller
     }
    public function loginout(){
        Auth::guard('admin')->logout(); // 退出
-       return view('admin.loginform');
+      // request()->session()->invalidate();
+       return redirect('/admin/login');
    }
     public function index()
     {
@@ -54,7 +92,7 @@ class LoginController extends Controller
         $username = $request->input('username');
         $password = $request->input('password');
 
-        echo $username . ';' . $password;
+      //  echo $username . ';' . $password;
 
 
         $user = $this->validate($request, [
@@ -63,20 +101,26 @@ class LoginController extends Controller
         ]);
 
        // $status = Auth::guard('admin')->attempt(['username' => $username, 'password' => $password]);
-
         $status = Auth::guard('admin')->attempt($user);
 
-        var_dump($status);
+       // var_dump($status);
 
         if ($status) {
 
-            session()->flash('danger', '很抱歉，您的用户名和密码不匹配');
+            session()->flash('flash_dangermsg', '奇怪，您的用户名和密码怎么就正确了呢');
 
             return redirect('/admin/index');
         }
+
         return redirect('/admin/login')->with('error','用户名或密码错误');
     }
 
+
+    public function create()
+    {
+        // return 'hello login';
+        return view('admin.create');
+    }
     /**
      * Store a newly created resource in storage.
      *
