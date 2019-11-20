@@ -6,6 +6,12 @@
                                 <input id="username" type="text"   name="username" value="" required   autofocus>
 
 
+                        @if ($errors->has('name'))
+                            <span class="help-block">
+                                        <strong>{{ $errors->first('name') }}</strong>
+                                    </span>
+                        @endif
+
                                 <input id="password" type="password"   name="password" required  >
 
 

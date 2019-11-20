@@ -6,51 +6,52 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
+use App\Http\Requests\Admin\Login;
 
 class LoginController extends Controller
 {
 
     public function __construct()
     {
-      // $this->middleware('adminauth')->except(['loginform','login','loginout']);//用户认证
-       // $this->middleware('adminauth');//死循环
+        // $this->middleware('adminauth')->except(['loginform','login','loginout']);//用户认证
+        // $this->middleware('adminauth');//死循环
     }
 
 
-/*
-   // 多字段登录并判断状态
-    public function attemptLogin(Request $request)
-    {
-        $username = $request->input('name');
-        $password = $request->input('password');
+    /*
+       // 多字段登录并判断状态
+        public function attemptLogin(Request $request)
+        {
+            $username = $request->input('name');
+            $password = $request->input('password');
 
-        // 验证用户名登录方式
-        $usernameLogin = $this->guard()->attempt(
-            ['name' => $username, 'password' => $password,'status'=>1], $request->has('remember')
-        );
-        if ($usernameLogin) {
-            return true;
+            // 验证用户名登录方式
+            $usernameLogin = $this->guard()->attempt(
+                ['name' => $username, 'password' => $password,'status'=>1], $request->has('remember')
+            );
+            if ($usernameLogin) {
+                return true;
+            }
+
+            // 验证手机号登录方式
+            $mobileLogin = $this->guard()->attempt(
+                ['mobile' => $username, 'password' => $password,'status'=>1], $request->has('remember')
+            );
+            if ($mobileLogin) {
+                return true;
+            }
+
+            // 验证邮箱登录方式
+            $emailLogin = $this->guard()->attempt(
+                ['email' => $username, 'password' => $password,'status'=>1], $request->has('remember')
+            );
+            if ($emailLogin) {
+                return true;
+            }
+
+            return false;
         }
-
-        // 验证手机号登录方式
-        $mobileLogin = $this->guard()->attempt(
-            ['mobile' => $username, 'password' => $password,'status'=>1], $request->has('remember')
-        );
-        if ($mobileLogin) {
-            return true;
-        }
-
-        // 验证邮箱登录方式
-        $emailLogin = $this->guard()->attempt(
-            ['email' => $username, 'password' => $password,'status'=>1], $request->has('remember')
-        );
-        if ($emailLogin) {
-            return true;
-        }
-
-        return false;
-    }
-*/
+    */
 
 
     /**
@@ -60,14 +61,23 @@ class LoginController extends Controller
      */
     public function loginform()
     {
+
         // return 'hello login';
         return view('admin.loginform');
     }
-   public function loginout(){
-       Auth::guard('admin')->logout(); // 退出
-      // request()->session()->invalidate();
-       return redirect('/admin/login');
-   }
+
+    public function commonfunctiondemo()
+    {
+        showMsg(1, 'Hello 公共方法!');//公共方法；app/helper/functions
+    }
+
+    public function loginout()
+    {
+        Auth::guard('admin')->logout(); // 退出
+        // request()->session()->invalidate();
+        return redirect('/admin/login');
+    }
+
     public function index()
     {
         // 获取当前认证用户...
@@ -76,9 +86,9 @@ class LoginController extends Controller
         // 获取当前认证用户的ID...
         $id = Auth::guard('admin')->id();
 
-       $data = ['id'=>$id,'user'=>$user];
+        $data = ['id' => $id, 'user' => $user];
 
-        return view('admin.index',$data);
+        return view('admin.index', $data);
     }
 
     /**
@@ -92,7 +102,7 @@ class LoginController extends Controller
         $username = $request->input('username');
         $password = $request->input('password');
 
-      //  echo $username . ';' . $password;
+        //  echo $username . ';' . $password;
 
 
         $user = $this->validate($request, [
@@ -100,10 +110,10 @@ class LoginController extends Controller
             'password' => 'required|min:5',
         ]);
 
-       // $status = Auth::guard('admin')->attempt(['username' => $username, 'password' => $password]);
+        // $status = Auth::guard('admin')->attempt(['username' => $username, 'password' => $password]);
         $status = Auth::guard('admin')->attempt($user);
 
-       // var_dump($status);
+        // var_dump($status);
 
         if ($status) {
 
@@ -112,13 +122,14 @@ class LoginController extends Controller
             return redirect('/admin/index');
         }
 
-        return redirect('/admin/login')->with('error','用户名或密码错误');
+        return redirect('/admin/login')->with('error', '用户名或密码错误');
     }
 
 
     public function create()
     {
         // return 'hello login';
+        $str = 'laravel 可以直接在控制器中直接写验证逻辑;不过我建议单独创建验证类；以控制器名为目录；以方法名为文件名； ';
         return view('admin.create');
     }
     /**
@@ -127,9 +138,12 @@ class LoginController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    // public function store(Request $request)
+    public function store(Login $request)
     {
-        //
+
+        echo '表单请求验证';
+        var_dump($request->all());
     }
 
     /**

@@ -34,8 +34,10 @@ Route::prefix('admin')->namespace('Admin')->group(function () {
     Route::get('loginout', 'LoginController@loginout');
 
 
-    Route::get('create', 'LoginController@create');//表单验证
-    Route::post('store', 'LoginController@store');//表单验证
+    Route::get('fun','LoginController@commonfunctiondemo');//公共方法测试
+
+    Route::get('create', 'LoginController@create');//表单请求验证
+    Route::post('store', 'LoginController@store');//表单请求验证
 
 });
 

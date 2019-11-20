@@ -80,7 +80,8 @@ return [
     |
     */
 
-    'locale' => 'en',
+   // 'locale' => 'en',
+    'locale' => 'zh-CN',
 
     /*
     |--------------------------------------------------------------------------
@@ -93,7 +94,8 @@ return [
     |
     */
 
-    'fallback_locale' => 'en',
+   'fallback_locale' => 'en',
+   // 'fallback_locale' => 'zh-CN',
 
     /*
     |--------------------------------------------------------------------------
@@ -106,8 +108,8 @@ return [
     |
     */
 
-   'faker_locale' => 'en_US',
-    //    'faker_locale' => 'zh_CN',
+   // 'faker_locale' => 'en_US',
+    'faker_locale' => 'zh_CN',
 
     /*
     |--------------------------------------------------------------------------
@@ -159,7 +161,8 @@ return [
         Illuminate\Redis\RedisServiceProvider::class,
         Illuminate\Auth\Passwords\PasswordResetServiceProvider::class,
         Illuminate\Session\SessionServiceProvider::class,
-        Illuminate\Translation\TranslationServiceProvider::class,
+        // Illuminate\Translation\TranslationServiceProvider::class,//表单英文提示
+         Overtrue\LaravelLang\TranslationServiceProvider::class,//表单中文提示
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
 

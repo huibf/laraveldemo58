@@ -29,9 +29,26 @@ class Login extends FormRequest
     public function rules()
     {
         return [
-            'username' => 'required|string|max:255',
+            'tag' => 'required',//非通用性的字段
+            'name' => 'required|string|max:255',
            // 'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
+           // 'password' => 'required|string|min:6|confirmed',
+            'age' => 'required|string|min:6',
         ];
     }
+
+    public function attributes()
+    {
+        return [
+            'tag' => '标签',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+           'tag.required' => '必须选择标签',
+        ];
+    }
+
 }
