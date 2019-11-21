@@ -35,6 +35,8 @@ Route::prefix('admin')->namespace('Admin')->group(function () {
 
 
     Route::get('fun','LoginController@commonfunctiondemo');//公共方法测试
+    Route::get('demoadminmodel','LoginController@demomodel');//模型方法调用测试
+    Route::get('demoadminmodela','LoginController@demomodel_a');//模型方法调用测试
 
     Route::get('create', 'LoginController@create');//表单请求验证
     Route::post('store', 'LoginController@store');//表单请求验证

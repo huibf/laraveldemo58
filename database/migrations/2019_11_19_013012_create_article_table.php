@@ -24,7 +24,7 @@ class CreateArticleTable extends Migration
             $table->enum('sex',[0,1])->default(0)->comment('性别，默认女');
             $table->char('phone',13)->default('')->comment('手机号码');
             */
-
+            $table->string('tag_id')->default('')->comment('标签id');//多个
             $table->string('title');
             $table->text('body');
             $table->string('description',100);

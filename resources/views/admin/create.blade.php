@@ -37,9 +37,11 @@
                                  提交
                                 </button>
   <br>
-                        @if (session('error'))
+
+                        @if (session('errors'))
                             <div class="alert alert-success">
-                            全部错误：    {{ session('error') }}
+                            全部错误：    {{ session('errors') }}<br>
+
                             </div>
                         @endif
 

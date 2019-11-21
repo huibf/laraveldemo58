@@ -7,9 +7,15 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
 use App\Http\Requests\Admin\Login;
+use App\Model\Admin;
 
 class LoginController extends Controller
 {
+    /*
+M(Model)-V(View)-C(Controller)模式去组织代码，很多时候也未必指导性很强，
+给Model加一个Repository，给Controller加一个Service，给View加一个Presenter，
+或许代码结构更清晰。
+    */
 
     public function __construct()
     {
@@ -54,6 +60,34 @@ class LoginController extends Controller
     */
 
 
+    public function demomodel()
+    {
+
+        $adminmodel = new Admin();
+
+        $adm = $adminmodel->demo();//模型对象调用
+
+        var_dump($adm);
+
+    }
+
+
+    public function demomodel_a()
+    {
+        $adm = null;
+        $admin = Admin::find(2);
+
+       debug($admin);// 调试扩展包 barryvdh/laravel-debugbar
+       p($admin);// 公共方法；app/helper/functions； 打印
+
+        if (!empty($admin)) {
+            $adm = $admin->demoa();// 调用模型对象的方法
+        }
+
+        var_dump($adm);
+
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -86,9 +120,12 @@ class LoginController extends Controller
         // 获取当前认证用户的ID...
         $id = Auth::guard('admin')->id();
 
-        $data = ['id' => $id, 'user' => $user];
+        $assign = ['id' => $id, 'user' => $user];
 
-        return view('admin.index', $data);
+        // $assign = compact('id', 'user' );
+
+
+        return view('admin.index', $assign);
     }
 
     /**
@@ -143,6 +180,8 @@ class LoginController extends Controller
     {
 
         echo '表单请求验证';
+        $data = session()->all();
+        var_dump($data);
         var_dump($request->all());
     }
 

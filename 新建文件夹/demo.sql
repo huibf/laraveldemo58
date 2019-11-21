@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS `admins` (
   UNIQUE KEY `admins_username_unique` (`username`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table demo.admins: ~3 rows (大约)
+-- Dumping data for table demo.admins: ~7 rows (大约)
 /*!40000 ALTER TABLE `admins` DISABLE KEYS */;
 INSERT INTO `admins` (`id`, `username`, `password`, `created_at`, `updated_at`) VALUES
 	(2, 'admin', '$2y$10$qzOQxT2GopemgQ5JBwxLPu8yhxftZXte06xe5Om7y2/IaPPfVZy3y', '2019-11-14 06:43:28', '2019-11-14 06:43:28'),
@@ -39,6 +39,19 @@ INSERT INTO `admins` (`id`, `username`, `password`, `created_at`, `updated_at`) 
 	(8, 'Watson Klein', '$2y$10$hU4e./cgZAqyby.yhhjRme/ecu9oqMq2gIm16dcOV77LZ/0X/Tj.q', '2019-11-16 07:31:48', '2019-11-16 07:31:48'),
 	(9, '吴智敏', '$2y$10$PqiPwT6gLHRVjh9p.zMNA.AFIyKg.bPL1vC6TaeaBfwDmhG7m.L0W', '2019-11-16 07:34:47', '2019-11-16 07:34:47');
 /*!40000 ALTER TABLE `admins` ENABLE KEYS */;
+
+-- Dumping structure for table demo.article
+CREATE TABLE IF NOT EXISTS `article` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Dumping data for table demo.article: ~0 rows (大约)
+/*!40000 ALTER TABLE `article` DISABLE KEYS */;
+/*!40000 ALTER TABLE `article` ENABLE KEYS */;
 
 -- Dumping structure for table demo.ceshi
 CREATE TABLE IF NOT EXISTS `ceshi` (
@@ -61,15 +74,16 @@ CREATE TABLE IF NOT EXISTS `migrations` (
   `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table demo.migrations: ~4 rows (大约)
+-- Dumping data for table demo.migrations: ~5 rows (大约)
 /*!40000 ALTER TABLE `migrations` DISABLE KEYS */;
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 	(1, '2014_10_12_000000_create_users_table', 1),
 	(2, '2014_10_12_100000_create_password_resets_table', 1),
 	(5, '2019_11_14_060506_create_admins_table', 2),
-	(8, '2019_11_16_025308_create_ceshi_table', 3);
+	(8, '2019_11_16_025308_create_ceshi_table', 3),
+	(11, '2019_11_19_013012_create_article_table', 4);
 /*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
 
 -- Dumping structure for table demo.password_resets

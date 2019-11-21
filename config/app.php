@@ -179,6 +179,9 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,//代码提示扩展库
+       // Barryvdh\Debugbar\ServiceProvider::class//代码调试扩展库
+
     ],
 
     /*
@@ -230,6 +233,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
 
+        // 'Debugbar' => Barryvdh\Debugbar\Facade::class,
     ],
 
 ];
