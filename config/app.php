@@ -67,7 +67,11 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    // 'timezone' => 'UTC',
+    // 'timezone' => 'PRC',//中国时区
+    // 'timezone'        => env('TIMEZONE','UTC'),
+    'timezone' => 'Asia/Shanghai', //中国时区
+
 
     /*
     |--------------------------------------------------------------------------
@@ -80,8 +84,8 @@ return [
     |
     */
 
-   // 'locale' => 'en',
-    'locale' => 'zh-CN',
+    // 'locale' => 'en',
+    'locale' => 'zh-CN',//默认语言
 
     /*
     |--------------------------------------------------------------------------
@@ -94,8 +98,8 @@ return [
     |
     */
 
-   'fallback_locale' => 'en',
-   // 'fallback_locale' => 'zh-CN',
+    'fallback_locale' => 'en',//备用语言
+
 
     /*
     |--------------------------------------------------------------------------
@@ -108,7 +112,7 @@ return [
     |
     */
 
-   // 'faker_locale' => 'en_US',
+    // 'faker_locale' => 'en_US',
     'faker_locale' => 'zh_CN',
 
     /*
@@ -162,9 +166,10 @@ return [
         Illuminate\Auth\Passwords\PasswordResetServiceProvider::class,
         Illuminate\Session\SessionServiceProvider::class,
         // Illuminate\Translation\TranslationServiceProvider::class,//表单英文提示
-         Overtrue\LaravelLang\TranslationServiceProvider::class,//表单中文提示
+        Overtrue\LaravelLang\TranslationServiceProvider::class,//表单中文提示
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,//代码提示扩展包
 
         /*
          * Package Service Providers...
@@ -179,8 +184,8 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
-        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,//代码提示扩展库
-       // Barryvdh\Debugbar\ServiceProvider::class//代码调试扩展库
+
+        // Barryvdh\Debugbar\ServiceProvider::class//代码调试扩展包
 
     ],
 

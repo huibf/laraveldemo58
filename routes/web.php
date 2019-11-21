@@ -43,4 +43,17 @@ Route::prefix('admin')->namespace('Admin')->group(function () {
 
 });
 
+
+//数据库 测试;集合collection 测试
+Route::prefix('database')->namespace('Admin')->group(function () {
+    Route::get('insert', 'DatabaseController@insert');
+    Route::get('get', 'DatabaseController@get');
+    Route::get('get_w', 'DatabaseController@get_w');
+    Route::get('collection', 'DatabaseController@demo_collection');
+    Route::get('collect', 'DatabaseController@demo_collect');
+    Route::get('array', 'DatabaseController@demo_array');
+    Route::get('model', 'DatabaseController@get_m');
+    Route::get('list', 'DatabaseController@get_lst');
+});
+
 //   https://juejin.im/post/5b5c14ba51882519d3467cac    Laravel5.6 实现后台管理登录(自定义用户表登录)

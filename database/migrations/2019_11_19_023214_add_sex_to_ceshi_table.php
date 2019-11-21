@@ -15,7 +15,7 @@ class AddSexToCeshiTable extends Migration
     {
         Schema::table('ceshi', function (Blueprint $table) {
 
-            $table->enum('sex',[0,1,2])->default(0)->comment('性别，默认女');
+            $table->enum('sex',[0,1,2])->default(0)->comment('性别，默认保密');
             $table->timestamp('published_at');
 
         });

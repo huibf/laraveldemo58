@@ -9,13 +9,16 @@ class DatabaseSeeder extends Seeder
      *
      * @return void
      */
+    //定义填充文件的执行顺序;有外键时顺序很重要
     public function run()
     {
         // $this->call(UsersTableSeeder::class);
+       // $this->call(ArticlesTableSeeder::class);//功能有限；
+
 
        /*
        //https://segmentfault.com/a/1190000005085328
-       //数据工厂制造测试数据
+       //数据工厂方式添加测试数据
         factory(App\Article::class, 50)->create()->each(function ($article) {
             $article->categories()->sync($article->category_id); //article表与Category表的关联关系，对应的模型中定义的
         });

@@ -16,17 +16,11 @@ class CreateArticleTable extends Migration
         Schema::create('article', function (Blueprint $table) {
             $table->bigIncrements('id');
 
-            /*
-             // category_id
-            $table->string('openid',255)->default('')->comment('微信端返回的openid');
-            $table->string('nickname',45)->default('')->comment('顾问昵称，一般取自微信昵称');
-            $table->string('avatar')->default('')->comment('用户头像');
-            $table->enum('sex',[0,1])->default(0)->comment('性别，默认女');
-            $table->char('phone',13)->default('')->comment('手机号码');
-            */
+            $table->integer('category_id')->unsigned()->default(0)->comment('分类id');
+            $table->string('title')->comment('标题');
+            $table->text('content')->comment('内容');
             $table->string('tag_id')->default('')->comment('标签id');//多个
-            $table->string('title');
-            $table->text('body');
+
             $table->string('description',100);
             $table->integer('author_id');
             $table->string('image_url')->default('')->comment('标题图片');

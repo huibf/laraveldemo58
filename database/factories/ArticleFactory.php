@@ -12,7 +12,7 @@ $factory->define(App\Model\Article::class, function (Faker $faker) {
         // 'post_id' => $faker->randomElement($post_ids),
 
         'title'       => $faker->name,
-        'body'        => $faker->paragraph,
+        'content'        => $faker->paragraph,
         'description' => $faker->sentence,
         'image_url'   => '/img/default.jpg',
         'author_id'   => function () {

@@ -12,6 +12,7 @@ use App\Model\Admin;
 class LoginController extends Controller
 {
     /*
+    https://xueyuanjun.com/books/laravel-packages  // Laravel 优质扩展包系列
 M(Model)-V(View)-C(Controller)模式去组织代码，很多时候也未必指导性很强，
 给Model加一个Repository，给Controller加一个Service，给View加一个Presenter，
 或许代码结构更清晰。
