@@ -43,6 +43,15 @@ INSERT INTO `admins` (`id`, `username`, `password`, `created_at`, `updated_at`) 
 -- Dumping structure for table demo.article
 CREATE TABLE IF NOT EXISTS `article` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `category_id` tinyint(1) NOT NULL DEFAULT '0' COMMENT '分类id',
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '标题',
+  `content` text COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '内容',
+  `tag_id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '标签id',
+  `description` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `author_id` int(11) NOT NULL,
+  `image_url` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '标题图片',
+  `author` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '昵称',
+  `realname` char(20) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '真实姓名',
   `deleted_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
@@ -53,37 +62,25 @@ CREATE TABLE IF NOT EXISTS `article` (
 /*!40000 ALTER TABLE `article` DISABLE KEYS */;
 /*!40000 ALTER TABLE `article` ENABLE KEYS */;
 
--- Dumping structure for table demo.ceshi
-CREATE TABLE IF NOT EXISTS `ceshi` (
-  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `age` int(11) NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `ceshi_name_unique` (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- Dumping data for table demo.ceshi: ~0 rows (大约)
-/*!40000 ALTER TABLE `ceshi` DISABLE KEYS */;
-/*!40000 ALTER TABLE `ceshi` ENABLE KEYS */;
-
 -- Dumping structure for table demo.migrations
 CREATE TABLE IF NOT EXISTS `migrations` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table demo.migrations: ~5 rows (大约)
+-- Dumping data for table demo.migrations: ~8 rows (大约)
 /*!40000 ALTER TABLE `migrations` DISABLE KEYS */;
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 	(1, '2014_10_12_000000_create_users_table', 1),
 	(2, '2014_10_12_100000_create_password_resets_table', 1),
 	(5, '2019_11_14_060506_create_admins_table', 2),
 	(8, '2019_11_16_025308_create_ceshi_table', 3),
-	(11, '2019_11_19_013012_create_article_table', 4);
+	(12, '2019_11_19_023214_add_sex_to_ceshi_table', 5),
+	(16, '2019_11_19_013012_create_article_table', 6),
+	(17, '2019_11_21_151021_change_category_id_in_article_table', 6),
+	(20, '2019_11_22_093110_add_api_token_to_users_table', 7);
 /*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
 
 -- Dumping structure for table demo.password_resets
@@ -190,15 +187,20 @@ CREATE TABLE IF NOT EXISTS `users` (
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `api_token` varchar(80) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  UNIQUE KEY `users_email_unique` (`email`),
+  UNIQUE KEY `users_api_token_unique` (`api_token`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table demo.users: ~0 rows (大约)
+-- Dumping data for table demo.users: ~1 rows (大约)
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `api_token`, `remember_token`, `created_at`, `updated_at`) VALUES
+	(1, 'userhui', '191207953@qq.com', '2019-11-22 10:41:58', '123456', '123456', NULL, NULL, NULL),
+	(2, 'userlsdf', 'slkdjf@sd.cn', NULL, '$2y$10$0bJTq9V.2VP2i6X1ctpzDultJKhbs8/RnMQOsOWqJOEiyAX3nXvHG', 'WDeg5C8htVR4wXOdwiUiwPbNzaSFhuwC8htHHmpiFRbz9u99FzWIMH1chCGJ', NULL, '2019-11-22 10:54:03', '2019-11-22 10:54:03');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
