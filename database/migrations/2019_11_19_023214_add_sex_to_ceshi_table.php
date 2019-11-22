@@ -30,9 +30,12 @@ class AddSexToCeshiTable extends Migration
     {
         Schema::table('ceshi', function (Blueprint $table) {
 
-            if (Schema::hasColumn('sex', 'published_at')) {
-                $table->dropColumn(['sex','added_on']);
+           // if (Schema::hasColumn('sex'))
+            {
+                $table->dropColumn(['sex','published_at']);
             }
+
+
         });
     }
 }

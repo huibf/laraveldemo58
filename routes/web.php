@@ -16,7 +16,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Auth::routes();
+ // Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
@@ -57,3 +57,16 @@ Route::prefix('database')->namespace('Admin')->group(function () {
 });
 
 //   https://juejin.im/post/5b5c14ba51882519d3467cac    Laravel5.6 实现后台管理登录(自定义用户表登录)
+
+
+
+
+// api认证；
+
+//  .../t?api_token=123456   //url地址
+//  .../t                    //url地址
+Route::group(['middleware' => ['auth.apitoken']], function () {
+    Route::get('/t', function () {
+        return 'web;ok';
+    });
+});

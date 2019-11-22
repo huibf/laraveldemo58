@@ -40,13 +40,19 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        'api' => [
+            'driver' => 'token',
+            'provider' => 'users',
+            'hash' => false,
+        ],
+
         'admin' => [
             'driver' => 'session',
             'provider' => 'admins',
         ],
-        'api' => [
+        'apitoken' => [
             'driver' => 'token',
-            'provider' => 'users',
+            'provider' => 'apitoken_pv',
             'hash' => false,
         ],
     ],
@@ -76,6 +82,10 @@ return [
         'admins' => [
             'driver' => 'eloquent',
             'model' => App\Model\Admin::class,
+        ],
+        'apitoken_pv' => [
+            'driver' => 'eloquent',
+            'model' => App\Model\Users::class,
         ],
         // 'users' => [
         //     'driver' => 'database',

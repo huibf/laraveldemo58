@@ -13,27 +13,22 @@ use Illuminate\Http\Request;
 |
 */
 
-//  .../api/demo  //url地址
+// url地址待研究
+
+//  api/demo
 Route::get('/demo', function (Request $request) {
-    return 'api;demo';
+    return 'apitoken;demo';
 })->name('demo');
 
 
-//  .../api/login  //url地址
-Route::get('/login', function (Request $request) {
-    return 'api;login ';
-})->name('login');
 
-
-//  .../api/t?api_token=123456   //users表 查找的记录；没有则login;
 Route::middleware('auth:apitoken')->get('/t', function (Request $request) {
-     // return 'ok；route; api';
-     return $request->user();
+    // return $request->user();
+    return 'apitoken;ok';
 });
 
-
-Route::middleware('auth:api')->get('/user', function (Request $request) {
+Route::middleware('auth:apitoken')->get('/user', function (Request $request) {
     // return $request->user();
-    return 'api middleware;router';
+    return 'apitoken; middleware;router';
 });
 

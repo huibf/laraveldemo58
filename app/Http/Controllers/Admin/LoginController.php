@@ -61,6 +61,11 @@ M(Model)-V(View)-C(Controller)模式去组织代码，很多时候也未必指�
     */
 
 
+    protected function guard()
+    {
+        return Auth::guard('admin');
+    }
+
     public function demomodel()
     {
 
@@ -78,8 +83,8 @@ M(Model)-V(View)-C(Controller)模式去组织代码，很多时候也未必指�
         $adm = null;
         $admin = Admin::find(2);
 
-       debug($admin);// 调试扩展包 barryvdh/laravel-debugbar
-       p($admin);// 公共方法；app/helper/functions； 打印
+        debug($admin);// 调试扩展包 barryvdh/laravel-debugbar
+        p($admin);// 公共方法；app/helper/functions； 打印
 
         if (!empty($admin)) {
             $adm = $admin->demoa();// 调用模型对象的方法
@@ -115,16 +120,20 @@ M(Model)-V(View)-C(Controller)模式去组织代码，很多时候也未必指�
 
     public function index()
     {
+
+
         // 获取当前认证用户...
         $user = Auth::guard('admin')->user();
 
         // 获取当前认证用户的ID...
         $id = Auth::guard('admin')->id();
 
+        //$api_token = $user->generateToken();//更新api_token;
+
+
         $assign = ['id' => $id, 'user' => $user];
 
         // $assign = compact('id', 'user' );
-
 
         return view('admin.index', $assign);
     }
@@ -148,8 +157,11 @@ M(Model)-V(View)-C(Controller)模式去组织代码，很多时候也未必指�
             'password' => 'required|min:5',
         ]);
 
+
+        // $status =  $this->attemLogin($request); //多个字段登录；待研究
+
         // $status = Auth::guard('admin')->attempt(['username' => $username, 'password' => $password]);
-        $status = Auth::guard('admin')->attempt($user);
+        $status = Auth::guard('admin')->attempt($user);//登录
 
         // var_dump($status);
 

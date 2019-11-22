@@ -18,8 +18,7 @@ class DemoAge
      */
     public function handle($request, Closure $next)
     {
-        /*
-              $age = $request->demoage;
+             $age = $request->demoage;
                $age = 450;// 测试数据
                if(isset($age)){
                    if ($age >= 150) {
@@ -29,18 +28,11 @@ class DemoAge
                    }
                }
 
-            */
 
-        if (!Auth::guard('admin')->check()) {
-
-            // echo '路由：adminauth；突出<br>';
-
-             return redirect('/admin/login');
-
-        }
-        // echo '路由：adminauth<br>';
+         echo '路由中间件：demoage <br>';
 
         return $next($request);
+
         /*
             $response = $next($request);
 

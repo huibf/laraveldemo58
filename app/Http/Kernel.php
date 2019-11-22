@@ -44,6 +44,10 @@ class Kernel extends HttpKernel
             'throttle:60,1',
             'bindings',
         ],
+
+        'apitoken' =>[
+
+        ],
     ];
 
     /**
@@ -65,7 +69,9 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
 
-        'adminauth' => \App\Http\Middleware\Adminauth::class,
+        'adminauth' => \App\Http\Middleware\Adminauth::class,//用户认证
+
+        'auth.apitoken' => \App\Http\Middleware\ApiToken::class,//API认证
 
 
     ];
