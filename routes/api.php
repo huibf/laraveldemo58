@@ -48,7 +48,6 @@ Route::prefix('v2')->middleware('auth:apitoken')->get('/user', function (Request
 });
 
 
-
 //路由分组
 
 //  .../api/v3/user
@@ -74,6 +73,31 @@ Route::prefix('v4')->middleware('auth:apitoken')->group(function () {
 
     Route::get('usera', function () {
         return 'v4 api usera;middleware;router'; // 匹配包含 "" 的 URL
+    });
+
+});
+
+
+//  .../api/v5/user
+Route::prefix('v5')->group(function () {
+
+    Route::get('user', function () {
+        $post = ['str' => 'v5 api user; router'];
+
+        $ssb = config('global.APPID');//全局变量 ; config/global
+        $ss = SUCCESS; //全局常量；app/services/utils/consts
+
+        $http_status = 204;//没有内容；http状态码
+        $http_status = config('global.HTTP_STATUS.Accepted');//http状态码；接收
+        $http_status_des = config('global.HTTP_STATUS_descript.202');//http状态码描述
+
+      return $ss.';'.$ssb.';'.$http_status_des;
+      //  return response()->json(['code' => 200, 'msg' => 'set token'], 200);
+        return response()->json(['code' => 10000, 'msg' => 'set token323'], $http_status);
+    });
+
+    Route::get('usera', function () {
+        return 'v5 api usera; router'; // 匹配包含 "" 的 URL
     });
 
 });

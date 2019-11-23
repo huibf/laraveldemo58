@@ -70,3 +70,6 @@ Route::group(['middleware' => ['auth.apitoken']], function () {
         return 'web;ok';
     });
 });
+
+// http status
+Route::get('/lang', 'Lang\HomeController@index') ;

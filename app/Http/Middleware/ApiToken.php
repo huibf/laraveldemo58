@@ -26,8 +26,12 @@ class ApiToken
        // p(Auth::guard('apitoken')->check());
 
         if (Auth::guard('apitoken')->check()) {//登录
+             $http_status = 204;//没有内容；http状态码
+             $http_status = config('global.HTTP_STATUS.202');
 
-            return response()->json(['code' => 200, 'msg' => 'set token']);
+           // return response()->json(['code' => 200, 'msg' => 'set token']);
+            return response()->json(['code' => 200, 'msg' => 'set token'], 200);
+            return response()->json(['code' => 200, 'msg' => 'set token'], $http_status);
         }
 
         //// return $next($request);
