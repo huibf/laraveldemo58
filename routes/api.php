@@ -78,7 +78,7 @@ Route::prefix('v4')->middleware('auth:apitoken')->group(function () {
 });
 
 
-//  .../api/v5/user
+//  .../api/v5/user?api_token=123456
 Route::prefix('v5')->group(function () {
 
     Route::get('user', function () {
@@ -86,6 +86,9 @@ Route::prefix('v5')->group(function () {
 
         $ssb = config('global.APPID');//全局变量 ; config/global
         $ss = SUCCESS; //全局常量；app/services/utils/consts
+
+
+        dump('telescope');//需打开telescope的dump项
 
         $http_status = 204;//没有内容；http状态码
         $http_status = config('global.HTTP_STATUS.Accepted');//http状态码；接收
@@ -98,6 +101,23 @@ Route::prefix('v5')->group(function () {
 
     Route::get('usera', function () {
         return 'v5 api usera; router'; // 匹配包含 "" 的 URL
+    });
+
+});
+
+
+
+//  .../api/v6/user?api_token=123456  //laravel-cors 测试
+Route::prefix('v6')->group(function () {
+
+    Route::get('user', function () {
+
+     return response()->json(['code' => 200, 'msg' => 'api demo'], 200);
+
+    });
+
+    Route::get('usera', function () {
+        return 'v6 api usera; router'; // 匹配包含 "" 的 URL
     });
 
 });
